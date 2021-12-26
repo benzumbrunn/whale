@@ -45,41 +45,59 @@ describe('create poolpair', () => {
     expect(result.length).toStrictEqual(6)
 
     const poolPairs = await Promise.all(result.map(async x => {
-      return await poolPairMapper.getLatest(`${x.poolpairId}`)
+      return await poolPairMapper.getLatest(`${x.poolPairId}`)
     }))
-
-    expect(poolPairs[1]).toStrictEqual({
-      commission: '0.00000000',
-      id: '11-112',
-      pairSymbol: 'E-DFI',
-      poolPairId: '11',
-      status: true,
-      tokenA: {
-        id: 5,
-        symbol: 'E'
-      },
-      tokenB: {
-        id: 0,
-        symbol: 'DFI'
-      },
-      block: expect.any(Object)
-    })
 
     expect(poolPairs[0]).toStrictEqual({
       commission: '0.00000000',
-      id: '12-113',
-      pairSymbol: 'F-DFI',
-      poolPairId: '12',
+      creationHeight: 108,
+      creationTx: expect.any(String),
+      customRewards: expect.any(Array),
+      id: '7-108',
+      name: 'USDT-Default Defi token',
+      ownerScript: expect.any(String),
+      pairSymbol: 'USDT-DFI',
+      poolPairId: '7',
       status: true,
       tokenA: {
-        id: 6,
-        symbol: 'F'
+        id: 1,
+        symbol: 'USDT',
+        reserve: '0'
       },
       tokenB: {
         id: 0,
-        symbol: 'DFI'
+        symbol: 'DFI',
+        reserve: '0'
       },
-      block: expect.any(Object)
+      totalLiquidity: '0',
+      block: expect.any(Object),
+      sort: '00000007'
+    })
+
+    expect(poolPairs[1]).toStrictEqual({
+      commission: '0.00000000',
+      creationHeight: 109,
+      creationTx: expect.any(String),
+      customRewards: expect.any(Array),
+      ownerScript: expect.any(String),
+      id: '8-109',
+      name: 'B-Default Defi token',
+      pairSymbol: 'B-DFI',
+      poolPairId: '8',
+      status: true,
+      tokenA: {
+        id: 2,
+        symbol: 'B',
+        reserve: '0'
+      },
+      tokenB: {
+        id: 0,
+        symbol: 'DFI',
+        reserve: '0'
+      },
+      totalLiquidity: '0',
+      block: expect.any(Object),
+      sort: '00000008'
     })
   })
 })
@@ -101,18 +119,27 @@ describe('invalidate', () => {
     const poolPair = await poolPairMapper.getLatest('14')
     expect(poolPair).toStrictEqual({
       commission: '0.00000000',
+      creationHeight: 116,
+      creationTx: expect.any(String),
+      customRewards: expect.any(Array),
+      ownerScript: expect.any(String),
+      name: 'G-Default Defi token',
+      sort: '0000000e',
       id: '14-116',
       pairSymbol: 'G-DFI',
       poolPairId: '14',
       status: true,
       tokenA: {
         id: 13,
-        symbol: 'G'
+        symbol: 'G',
+        reserve: '0'
       },
       tokenB: {
         id: 0,
-        symbol: 'DFI'
+        symbol: 'DFI',
+        reserve: '0'
       },
+      totalLiquidity: '0',
       block: expect.any(Object)
     })
 

@@ -42,14 +42,6 @@ export class PoolPairMapper {
     })
   }
 
-  async list (limit: number, lt?: string): Promise<PoolPair[]> {
-    return await this.database.query(PoolPairMapping.index.poolpair_id, {
-      limit: limit,
-      order: SortOrder.DESC,
-      lt: lt
-    })
-  }
-
   async get (id: string): Promise<PoolPair | undefined> {
     return await this.database.get(PoolPairMapping, id)
   }
@@ -64,16 +56,20 @@ export class PoolPairMapper {
 }
 
 export interface PoolPair extends Model {
-  id: string // poolPairId-blockHeight
-  poolPairId: string // poolPairId (decimal encoded integer as string)
-  pairSymbol: string // string
+  id: string // --------------| poolPairId-blockHeight
+  sort: string // ------------| poolPairId (hex encoded)
+  poolPairId: string // ------| poolPairId (decimal encoded integer as string)
+  pairSymbol: string // ------| string
+  name: string // ------------| string
   tokenA: {
-    id: number // numerical id
-    symbol: string
+    id: number // ------------| numerical id
+    symbol: string // --------| string
+    reserve: string // -------| bignumber
   }
   tokenB: {
-    id: number // numerical id
-    symbol: string
+    id: number // ------------| numerical id
+    symbol: string // --------| string
+    reserve: string // -------| bignumber
   }
   block: {
     hash: string
@@ -81,6 +77,11 @@ export interface PoolPair extends Model {
     time: number
     medianTime: number
   }
-  status: boolean // active
-  commission: string // bignumber
+  status: boolean // ---------| active / not active
+  commission: string // ------| bignumber
+  totalLiquidity: string // --| bignumber
+  creationHeight: number // --| number
+  creationTx: string // ------| txid string
+  customRewards: string[] // -| array of strings
+  ownerScript: string // -----| hex string
 }

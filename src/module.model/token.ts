@@ -57,6 +57,14 @@ export class TokenMapper {
     })
   }
 
+  async queryAsc (limit: number, lt?: string): Promise<Token[]> {
+    return await this.database.query(TokenMapping.index.sort, {
+      limit: limit,
+      order: SortOrder.ASC,
+      lt: lt
+    })
+  }
+
   async get (id: string): Promise<Token | undefined> {
     return await this.database.get(TokenMapping, id)
   }
