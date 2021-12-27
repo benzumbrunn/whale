@@ -19,6 +19,7 @@ import { PoolSwapIndexer } from './dftx/poolswap'
 import { SetLoanTokenIndexer } from './dftx/set.loan.token'
 import { UpdatePoolPairIndexer } from './dftx/update.poolpair'
 import { CompositeSwapIndexer } from './dftx/compositeswap'
+import { UpdateLoanTokenIndexer } from './dftx/update.loan.token'
 import { ActivePriceIndexer } from './dftx/active.price'
 import { PlaceAuctionBidIndexer } from './dftx/place.auction.bid'
 
@@ -27,6 +28,7 @@ export class MainDfTxIndexer extends Indexer {
   private readonly logger = new Logger(MainDfTxIndexer.name)
   private readonly indexers: Array<DfTxIndexer<any>>
 
+  // eslint-disable-next-line no-dupe-args
   constructor (
     appointOracle: AppointOracleIndexer,
     removeOracle: RemoveOracleIndexer,
@@ -44,7 +46,8 @@ export class MainDfTxIndexer extends Indexer {
     compositeSwapIndexer: CompositeSwapIndexer,
     setLoanToken: SetLoanTokenIndexer,
     activePriceIndexer: ActivePriceIndexer,
-    placeAuctionBidIndexer: PlaceAuctionBidIndexer
+    placeAuctionBidIndexer: PlaceAuctionBidIndexer,
+    updateLoanToken: UpdateLoanTokenIndexer
   ) {
     super()
     this.indexers = [
@@ -64,7 +67,9 @@ export class MainDfTxIndexer extends Indexer {
       compositeSwapIndexer,
       setLoanToken,
       activePriceIndexer,
-      placeAuctionBidIndexer
+      placeAuctionBidIndexer,
+      updateLoanToken,
+      activePriceIndexer
     ]
   }
 

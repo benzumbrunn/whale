@@ -15,9 +15,10 @@ import { PoolAddLiquidityIndexer } from './pool.add.liquidity'
 import { PoolRemoveLiquidityIndexer } from './pool.remove.liquidity'
 import { PoolSwapIndexer } from './poolswap'
 import { CompositeSwapIndexer } from './compositeswap'
-import { SetLoanTokenIndexer } from './set.loan.token'
-import { ActivePriceIndexer } from './active.price'
 import { PlaceAuctionBidIndexer } from './place.auction.bid'
+import { SetLoanTokenIndexer } from '@src/module.indexer/model/dftx/set.loan.token'
+import { UpdateLoanTokenIndexer } from '@src/module.indexer/model/dftx/update.loan.token'
+import { ActivePriceIndexer } from '@src/module.indexer/model/dftx/active.price'
 
 const indexers = [
   AppointOracleIndexer,
@@ -36,7 +37,9 @@ const indexers = [
   CompositeSwapIndexer,
   SetLoanTokenIndexer,
   ActivePriceIndexer,
-  PlaceAuctionBidIndexer
+  PlaceAuctionBidIndexer,
+  UpdateLoanTokenIndexer,
+  ActivePriceIndexer
 ]
 
 @Module({
@@ -47,7 +50,8 @@ const indexers = [
         return configService.get<string>('network') as NetworkName
       },
       inject: [ConfigService]
-    }],
+    }
+  ],
   exports: indexers
 })
 export class DfTxIndexerModule {
